@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,14 +20,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private Button validate;
@@ -41,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText teleEdit;
 
     private GridLayout gridTelephones;
+    private Set<String> telephonesSet = new HashSet<String>();
+
+    private SharedPreferences sp;
+    private final String spFileName = "main_sp";
+    private final String KEY_TELE = "telephones";
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         getDelegate().onStart();
         Log.i("Lifecycle MainActivity", "onRestart method");
+
     }
 
     @Override
@@ -78,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         this.addTele = (Button) findViewById(R.id.bt_add_tele);
         this.gotoNext = (Button) findViewById(R.id.gotoNext);
         this.gridTelephones = (GridLayout) findViewById(R.id.grid_list_telephones);
+        this.sp = getSharedPreferences(this.spFileName, MODE_PRIVATE);
+        getTeleNumbersFromSP();
+        if (!this.telephonesSet.isEmpty())
+            showSavedTelephones();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -109,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         this.addTele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTelephone();
+                final String telephone = teleEdit.getText().toString();
+                addTelephone(telephone);
             }
         });
         this.gotoNext.setOnClickListener(new View.OnClickListener() {
@@ -127,12 +137,15 @@ public class MainActivity extends AppCompatActivity {
     protected  void onPause() {
         super.onPause();
         Log.i("Lifecycle MainActivity", "onPause method");
+        saveTeleNumbersInSP();
     }
     @Override
     protected void onStop() {
         super.onStop();
-        getDelegate().onStop();
+        //getDelegate().onStop();
         Log.i("Lifecycle MainActivity", "onStop method");
+        saveTeleNumbersInSP();
+
     }
     @Override
     protected void onDestroy() {
@@ -173,12 +186,15 @@ public class MainActivity extends AppCompatActivity {
             this.countryEdit.setText("");
             this.teleEdit.setText("");
             this.gridTelephones.removeAllViews();
+            SharedPreferences.Editor editor = this.sp.edit();
+            editor.remove(KEY_TELE);
+            this.telephonesSet.clear();
         }
         return true;
     }
 
-    public void addTelephone() {
-        String telephone = this.teleEdit.getText().toString();
+    public void addTelephone(final String telephone) {
+        //final String telephone = this.teleEdit.getText().toString();
         if (!InputNumberCheck.checkFormat(telephone)) {
             Snackbar.make(findViewById(R.id.main_constraint_layout), R.string.err_badformat_number, Snackbar.LENGTH_LONG).show();
             return;
@@ -186,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView itemTele = new TextView(this);
         itemTele.setText(telephone);
         itemTele.setTextColor(Color.BLACK);
+        telephonesSet.add(telephone);
         final Button delete = new Button(this);
         delete.setText("delete");
         delete.setOnClickListener(new View.OnClickListener() {
@@ -193,12 +210,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 gridTelephones.removeView(itemTele);
                 gridTelephones.removeView(delete);
+                telephonesSet.remove(telephone);
             }
         });
 
         gridTelephones.addView(itemTele);
         gridTelephones.addView(delete);
         this.teleEdit.setText("");
+    }
+
+    private void showSavedTelephones() {
+        this.gridTelephones.removeAllViews();
+        if (!this.telephonesSet.isEmpty()) {
+            for (String telephone : this.telephonesSet) {
+                addTelephone(telephone);
+            }
+        }
     }
 
 
@@ -217,6 +244,15 @@ public class MainActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
+    private void saveTeleNumbersInSP() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putStringSet(this.KEY_TELE, this.telephonesSet);
+        editor.apply();
+    }
+
+    private void getTeleNumbersFromSP() {
+        this.telephonesSet = this.sp.getStringSet(this.KEY_TELE, new HashSet<String>());
+    }
     /**
      * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时没必要隐藏
      *

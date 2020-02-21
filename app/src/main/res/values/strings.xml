@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">zheng and ye\'s app</string>
+    <string name="activity_main">activity main</string>
+    <string name="activity_second">second activity</string>
     <string name="titleOfSecondActicity">ready</string>
     <string name="BT_mainToSecond">validate</string>
     <string name="BT_Clik">next</string>
