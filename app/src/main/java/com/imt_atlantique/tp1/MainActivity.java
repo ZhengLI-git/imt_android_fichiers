@@ -16,10 +16,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -39,13 +41,20 @@ public class MainActivity extends AppCompatActivity {
     private EditText countryEdit;
     private EditText teleEdit;
 
+    private Spinner departmentEdit;
     private GridLayout gridTelephones;
     private Set<String> telephonesSet = new HashSet<String>();
 
     private SharedPreferences sp;
     private final String spFileName = "main_sp";
     private final String KEY_TELE = "telephones";
+    private final String KEY_FIRSTNAME = "firstname";
+    private final String KEY_LASTNAME = "lastname";
+    private final String KEY_BIRTHDAY = "birthday";
+    private final String KEY_COUNTRY = "country";
+    private final String KEY_DEPARTMENT = "department";
 
+    private  String department;
     final Calendar myCalendar = Calendar.getInstance();
 
 
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        this.departmentEdit = (Spinner) findViewById(R.id.spinner);
         this.validate = (Button)findViewById(R.id.bt_validate);
         this.firstNameEdit = (EditText) findViewById(R.id.firstname_edit);
         this.lastNameEdit = (EditText) findViewById(R.id.lastname_edit);
@@ -129,6 +139,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        this.departmentEdit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               Spinner spinner = (Spinner)adapterView.getItemAtPosition(i);
+                department = (String)spinner.getItemAtPosition(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+               // departmentEdit.setSelection(（Spinner）adapterView.getP);
+            }
+        });
         Log.i("Lifecycle MainActivity", "onResume method");
 
     }
@@ -137,15 +159,14 @@ public class MainActivity extends AppCompatActivity {
     protected  void onPause() {
         super.onPause();
         Log.i("Lifecycle MainActivity", "onPause method");
-        saveTeleNumbersInSP();
+        saveInputValueInSP();
     }
     @Override
     protected void onStop() {
         super.onStop();
         //getDelegate().onStop();
         Log.i("Lifecycle MainActivity", "onStop method");
-        saveTeleNumbersInSP();
-
+        saveInputValueInSP();
     }
     @Override
     protected void onDestroy() {
@@ -250,6 +271,53 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void saveFirstNameInSp() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_FIRSTNAME, this.firstNameEdit.getText().toString());
+        editor.apply();
+    }
+    private void saveLastNameInSp() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_LASTNAME, this.lastNameEdit.getText().toString());
+        editor.apply();
+    }
+    private void saveCountryInSp() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_COUNTRY, this.countryEdit.getText().toString());
+        editor.apply();
+    }
+    private void saveBirthdayInSp() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_BIRTHDAY, this.birthdayEdit.getText().toString());
+        editor.apply();
+    }
+    private void saveDepartmentInSp() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_DEPARTMENT, this.department);
+        editor.apply();
+    }
+
+    private void saveInputValueInSP() {
+        saveFirstNameInSp();
+        saveLastNameInSp();
+        saveCountryInSp();
+        saveBirthdayInSp();
+        saveTeleNumbersInSP();
+        saveDepartmentInSp();
+    }
+
+    private void getInputValueFromSP() {
+        if (this.sp.contains(KEY_FIRSTNAME))
+            this.firstNameEdit.setText(this.sp.getString(KEY_FIRSTNAME,""));
+        if (this.sp.contains(KEY_LASTNAME))
+            this.lastNameEdit.setText(this.sp.getString(KEY_LASTNAME,""));
+        if (this.sp.contains(KEY_COUNTRY)
+            this.countryEdit.setText(this.sp.getString(KEY_COUNTRY,""));
+        if (this.sp.contains(KEY_BIRTHDAY))
+            this.birthdayEdit.setText(this.sp.getString(KEY_BIRTHDAY,""));
+        if (this.sp.contains(KEY_DEPARTMENT))
+            this.department = this.sp.getString(KEY_DEPARTMENT, "");
+    }
     private void getTeleNumbersFromSP() {
         this.telephonesSet = this.sp.getStringSet(this.KEY_TELE, new HashSet<String>());
     }
