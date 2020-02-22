@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8de3fe0d-4206-4483-a455-d5a972dca1bb" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_annotation_annotation_1_0_0_jar2.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_2_aar2.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_arch_core_core_common_2_0_0_jar2.xml" afterDir="false" />
@@ -72,6 +73,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,10 +106,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="43">
               <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+=======
+            <state relative-caret-position="260">
+              <caret line="150" column="17" selection-start-line="150" selection-start-column="17" selection-end-line="150" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1411#1419#0" expanded="true" />
+                <element signature="e#3193#3625#0" expanded="true" />
+                <element signature="e#3624#3625#0" expanded="true" />
+                <element signature="e#4248#4477#0" expanded="true" />
+                <element signature="e#4476#4477#0" expanded="true" />
+                <element signature="e#4521#4764#0" expanded="true" />
+                <element signature="e#4763#4764#0" expanded="true" />
+                <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" />
+                <element signature="method#validateAction#0;class#MainActivity#0" />
+                <element signature="method#updateLabel#0;class#MainActivity#0" />
+                <element signature="method#dispatchTouchEvent#0;class#MainActivity#0" />
+                <element signature="method#hideSoftInput#0;class#MainActivity#0" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
               </folding>
             </state>
           </provider>
@@ -139,8 +164,15 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+<<<<<<< HEAD
           <provider selected="true" editor-type-id="android-designer2" />
           <provider editor-type-id="text-editor" />
+=======
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="-2896" />
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -199,7 +231,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>onSa</find>
+=======
+      <find>rese</find>
+      <find>depa</find>
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -210,13 +247,16 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/ClickActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_second.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_second.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/SecondActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/local.properties" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
         <option value="$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java" />
       </list>
     </option>
@@ -384,6 +424,14 @@
       <option name="presentableId" value="Default" />
       <updated>1582274599322</updated>
     </task>
+    <task id="LOCAL-00001" summary="finished &quot;persistance avec fichiers&quot;, solved laucher issue">
+      <created>1582295831360</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1582295831361</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -396,7 +444,11 @@
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Resources Explorer" order="6" />
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.25763127" />
+=======
+      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.22069523" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
       <window_info id="Captures" order="8" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Logcat" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
@@ -406,8 +458,12 @@
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="6" weight="0.45918366" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.8469388" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.24543947" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.13432837" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -416,6 +472,7 @@
       <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" visible="true" weight="0.07448108" />
     </layout>
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.History.Properties">
     <option name="SHOW_OTHER_BRANCHES" value="true" />
     <option name="COLUMN_ORDER">
@@ -426,6 +483,11 @@
         <option value="1" />
       </list>
     </option>
+=======
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finished &quot;persistance avec fichiers&quot;, solved laucher issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished &quot;persistance avec fichiers&quot;, solved laucher issue" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -444,19 +506,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java</url>
+<<<<<<< HEAD
           <line>193</line>
+=======
+          <line>76</line>
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java</url>
+<<<<<<< HEAD
           <line>205</line>
+=======
+          <line>95</line>
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java</url>
+<<<<<<< HEAD
           <line>229</line>
+=======
+          <line>182</line>
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
           <properties class="com.imt_atlantique.tp1.MainActivity" method="validateAction" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -564,12 +638,39 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
           <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-2896" />
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/imt_atlantique/tp1/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="150" column="17" selection-start-line="150" selection-start-column="17" selection-end-line="150" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1411#1419#0" expanded="true" />
+            <element signature="e#3193#3625#0" expanded="true" />
+            <element signature="e#3624#3625#0" expanded="true" />
+            <element signature="e#4248#4477#0" expanded="true" />
+            <element signature="e#4476#4477#0" expanded="true" />
+            <element signature="e#4521#4764#0" expanded="true" />
+            <element signature="e#4763#4764#0" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#MainActivity#0" />
+            <element signature="method#validateAction#0;class#MainActivity#0" />
+            <element signature="method#updateLabel#0;class#MainActivity#0" />
+            <element signature="method#dispatchTouchEvent#0;class#MainActivity#0" />
+            <element signature="method#hideSoftInput#0;class#MainActivity#0" />
+>>>>>>> 573f56988857766d7775b5f44cd8ae552e1b2c8b
           </folding>
         </state>
       </provider>
