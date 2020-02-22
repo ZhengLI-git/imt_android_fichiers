@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -38,13 +39,28 @@ public class MainActivity extends AppCompatActivity {
     private EditText birthdayEdit;
     private EditText countryEdit;
     private EditText teleEdit;
+    private Spinner departmentSpinn;
 
     private GridLayout gridTelephones;
     private Set<String> telephonesSet = new HashSet<String>();
 
     private SharedPreferences sp;
+
     private final String spFileName = "main_sp";
     private final String KEY_TELE = "telephones";
+    private final String KEY_FIRSTNAME = "firstname";
+    private final String KEY_LASTNAME = "lastname";
+    private final String KEY_BIRTHDAY = "birthday";
+    private final String KEY_COUNTRY = "country";
+    private final String KEY_DEPARTMENT = "department";
+
+    private String firstName;
+    private String lastName;
+    private String birthday;
+    private String country;
+    private String department;
+
+
 
     final Calendar myCalendar = Calendar.getInstance();
 
@@ -53,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Log.i("Lifecycle MainActivity", "onCreate method");
     }
     @Override
@@ -84,7 +99,10 @@ public class MainActivity extends AppCompatActivity {
         this.gotoNext = (Button) findViewById(R.id.gotoNext);
         this.gridTelephones = (GridLayout) findViewById(R.id.grid_list_telephones);
         this.sp = getSharedPreferences(this.spFileName, MODE_PRIVATE);
+        this.departmentSpinn = (Spinner) findViewById(R.id.spinner);
         getTeleNumbersFromSP();
+        showInfoFromSF();
+        //showSavedInfo();
         if (!this.telephonesSet.isEmpty())
             showSavedTelephones();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -138,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Log.i("Lifecycle MainActivity", "onPause method");
         saveTeleNumbersInSP();
+        saveInfoInSF();
     }
     @Override
     protected void onStop() {
@@ -150,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         Log.i("Lifecycle MainActivity", "onDestroy method");
     }
 
@@ -158,6 +178,54 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        Log.i("Lifecycle MainActivity", "onSaveInstanceState method");
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        Log.i("Lifecycle MainActivity", "onRestoreInstanceState method");
+    }
+
+    private void saveInfoInSF() {
+        SharedPreferences.Editor editor = this.sp.edit();
+        editor.putString(KEY_FIRSTNAME, this.firstNameEdit.getText().toString());
+        editor.putString(KEY_LASTNAME, this.lastNameEdit.getText().toString());
+        editor.putString(KEY_COUNTRY, this.countryEdit.getText().toString());
+        editor.putString(KEY_BIRTHDAY, this.birthdayEdit.getText().toString());
+        editor.putInt(KEY_DEPARTMENT, this.departmentSpinn.getSelectedItemPosition());
+        editor.apply();
+//        editor.putString(KEY_DEPARTMENT, this.departmentSpinn.getText().toString());
+    }
+
+    private void showInfoFromSF() {
+        if (this.sp.contains(KEY_FIRSTNAME))
+            this.firstNameEdit.setText(this.sp.getString(KEY_FIRSTNAME, ""));
+        if (this.sp.contains(KEY_LASTNAME))
+            this.lastNameEdit.setText(this.sp.getString(KEY_LASTNAME, ""));
+        if (this.sp.contains(KEY_COUNTRY))
+            this.countryEdit.setText(this.sp.getString(KEY_COUNTRY, ""));
+        if (this.sp.contains(KEY_BIRTHDAY))
+            this.birthdayEdit.setText(this.sp.getString(KEY_BIRTHDAY, ""));
+        if (this.sp.contains(KEY_DEPARTMENT))
+            this.departmentSpinn.setSelection(this.sp.getInt(KEY_DEPARTMENT,1));
+    }
+
+//    private void showSavedInfo() {
+//        if (this.firstName != null)
+//            this.firstNameEdit.setText(this.firstName);
+//        if (this.lastName != null)
+//            this.lastNameEdit.setText(this.lastName);
+//        if (this.country != null)
+//            this.countryEdit.setText(this.country);
+//        if (this.birthday != null)
+//            this.birthdayEdit.setText(this.birthday);
+////        if (this.department != null)
+////            this.dep.setText(this.firstName);
+//    }
 
     public void validateAction() {
         Log.i("Lifecycle MainActivity", "validateAction");
