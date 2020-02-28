@@ -1,4 +1,4 @@
-package com.imt_atlantique.tp1;
+package com.imt_atlantique.tp1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

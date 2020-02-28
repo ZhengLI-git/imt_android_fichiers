@@ -1,4 +1,4 @@
-package com.imt_atlantique.tp1;
+package com.imt_atlantique.tp1.Activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.imt_atlantique.tp1.R;
 
 import java.io.File;
 import java.io.FileInputStream;

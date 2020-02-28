@@ -4,4 +4,14 @@
         android:title="@string/reset_action"
         android:onClick="resetAction">
     </item>
+    <item android:id="@+id/searchAction"
+        android:title="@string/search_action"
+        android:onClick="searchDepartmentAction">
+
+    </item>
+    <item android:id="@+id/shareAction"
+        android:title="@string/share_action"
+        android:onClick="shareDepartmentAction">
+
+    </item>
 </menu>

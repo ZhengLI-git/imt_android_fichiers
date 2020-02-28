@@ -1,4 +1,4 @@
-package com.imt_atlantique.tp1;
+package com.imt_atlantique.tp1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -24,6 +25,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.imt_atlantique.tp1.InputNumberCheck;
+import com.imt_atlantique.tp1.R;
+import com.imt_atlantique.tp1.User;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -53,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
     private final String KEY_BIRTHDAY = "birthday";
     private final String KEY_COUNTRY = "country";
     private final String KEY_DEPARTMENT = "department";
+
+    public static final String KEY_USER = "user";
+
+    private final int defalutDepartmentID = 0;
 
     private String firstName;
     private String lastName;
@@ -238,6 +246,12 @@ public class MainActivity extends AppCompatActivity {
             textToShow = "Please complete your information";
         Snackbar.make(findViewById(R.id.main_constraint_layout), textToShow, Snackbar.LENGTH_LONG).show();
 
+        User user = new User(this.firstNameEdit.getText().toString(), this.lastNameEdit.getText().toString(), this.departmentSpinn.getSelectedItem().toString());
+        Intent intent = new Intent(this, DisplayActivity.class);
+        intent.putExtra(KEY_USER, user);
+        startActivity(intent);
+
+
     }
 
     private void updateLabel() {
@@ -247,13 +261,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean resetAction(MenuItem item) {
-        if (item.getTitle().equals("reset action")) {
+        if (item.getTitle().equals("reset")) {
             this.firstNameEdit.setText("");
             this.lastNameEdit.setText("");
             this.birthdayEdit.setText("");
             this.countryEdit.setText("");
             this.teleEdit.setText("");
             this.gridTelephones.removeAllViews();
+            this.departmentSpinn.setSelection(this.defalutDepartmentID);
             SharedPreferences.Editor editor = this.sp.edit();
             editor.remove(KEY_TELE);
             this.telephonesSet.clear();
@@ -317,6 +332,41 @@ public class MainActivity extends AppCompatActivity {
         editor.putStringSet(this.KEY_TELE, this.telephonesSet);
         editor.apply();
     }
+
+    public boolean searchDepartmentAction(MenuItem item) {
+        if (item.getTitle().equals("search")) {
+            String depart = this.departmentSpinn.getSelectedItem().toString();
+            Uri uri = Uri.parse("http://fr.wikipedia.org/?search="+depart);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+            // Verify that the intent will resolve to an activity
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+        return true;
+    }
+
+    public boolean shareDepartmentAction(MenuItem item) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+// The intent does not have a URI, so declare the "text/plain" MIME type
+        intent.putExtra(Intent.EXTRA_TEXT, this.departmentSpinn.getSelectedItem().toString());
+        intent.setType("text/plain");
+
+
+        //use default app
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+
+// Create and start the chooser
+        String title = getResources().getText(R.string.chooser_title).toString();
+        Intent chooser = Intent.createChooser(intent, title);
+       startActivity(chooser);
+       return true;
+
+    }
+
 
     private void getTeleNumbersFromSP() {
         this.telephonesSet = this.sp.getStringSet(this.KEY_TELE, new HashSet<String>());

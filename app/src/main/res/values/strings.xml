@@ -16,7 +16,12 @@
     <string name="hint_birthday">birthday</string>
     <string name="hint_country">country</string>
     <string name="hint_telephone">telephone</string>
-    <string name="reset_action">reset action</string>
+
+
+    <string name="reset_action">reset</string>
+    <string name="search_action">search</string>
+    <string name="share_action">share</string>
+    <string name="chooser_title">share your department by</string>
 
     <string name="err_badformat_number">Sorry, your number is in bad format, please retry.</string>
 
