@@ -16,6 +16,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class DateActivity extends AppCompatActivity {
+
+    private String year;
+    private String month;
+    private String day;
     final Calendar myCalendar = Calendar.getInstance();
 
     public static final String KEY_RESULT_CODE = "result code";
@@ -46,9 +50,10 @@ public class DateActivity extends AppCompatActivity {
 
         };
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(DateActivity.this, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH));
+        this.getDefaultValue();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(DateActivity.this, date, Integer.valueOf(this.year),
+                Integer.valueOf(this.month)-1,
+                        Integer.valueOf(this.day));
         datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
@@ -60,8 +65,15 @@ public class DateActivity extends AppCompatActivity {
 
     }
 
+    private void getDefaultValue() {
+        Intent intent = getIntent();
+        this.year = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_YEAR);
+        this.month = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_MONTH);
+        this.day = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_DAY);
+    }
+
     private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         this.birthday = sdf.format(myCalendar.getTime());
     }

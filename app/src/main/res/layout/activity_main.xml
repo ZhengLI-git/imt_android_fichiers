@@ -160,7 +160,15 @@
         app:layout_constraintTop_toTopOf="@+id/telephone_edit" />
 
 
-        <LinearLayout
+    <Button
+        android:id="@+id/bt_call_tele"
+        android:layout_width="68dp"
+        android:layout_height="39dp"
+        android:text="@string/BT_call_tele"
+        app:layout_constraintStart_toStartOf="@+id/bt_add_tele"
+        app:layout_constraintTop_toBottomOf="@+id/bt_add_tele" />
+
+    <LinearLayout
             android:id="@+id/list_telephones"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -214,6 +222,24 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toEndOf="@+id/date_edit"
         app:layout_constraintTop_toTopOf="@+id/date_edit" />
+
+    <Button
+        android:id="@+id/gotoShowActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/BT_show_lastname"
+        app:layout_constraintStart_toEndOf="@+id/lastname_edit"
+        app:layout_constraintTop_toTopOf="@+id/lastname_edit" />
+
+    <Button
+        android:id="@+id/gotoEditActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/BT_edit_firstname"
+        app:layout_constraintStart_toEndOf="@+id/firstname_edit"
+        app:layout_constraintTop_toTopOf="@+id/firstname_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

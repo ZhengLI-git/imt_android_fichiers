@@ -5,6 +5,8 @@
     <string name="titleOfSecondActicity">ready</string>
     <string name="BT_mainToSecond">validate</string>
     <string name="BT_Clik">next</string>
+    <string name="BT_show_lastname">show</string>
+    <string name="BT_edit_firstname">edit</string>
 
     <string name="use_picker">use picker</string>
     <string name="cancel">cancel</string>
@@ -26,6 +28,10 @@
     <string name="hint_telephone">telephone</string>
 
 
+    <string name="bad_format_birthday">Sorry, please input your birthday in format of dd/mm/yyyy</string>
+    <string name="not_valid_date">Sorry, the date you input is not a valid date</string>
+
+
     <string name="reset_action">reset</string>
     <string name="search_action">search</string>
     <string name="share_action">share</string>
@@ -34,5 +40,6 @@
     <string name="err_badformat_number">Sorry, your number is in bad format, please retry.</string>
 
     <string name="BT_add_tele">add</string>
+    <string name="BT_call_tele">call</string>
 
 </resources>

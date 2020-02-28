@@ -1,6 +1,7 @@
 package com.imt_atlantique.tp1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -27,14 +28,28 @@ import com.imt_atlantique.tp1.InputNumberCheck;
 import com.imt_atlantique.tp1.R;
 import com.imt_atlantique.tp1.User;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     private Button validate;
     private Button addTele;
     private Button gotoNext;
     private Button gotoDateActivityBT;
+    private Button gotoShowLastNMActivityBT;
+    private Button gotoEditFirstNMActivityBT;
+    private Button gotoDialActivity;
+
     private EditText firstNameEdit;
     private EditText lastNameEdit;
     private EditText birthdayEdit;
@@ -47,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sp;
 
-    private final String spFileName = "main_sp";
-    private final String KEY_TELE = "telephones";
-    private final String KEY_FIRSTNAME = "firstname";
-    private final String KEY_LASTNAME = "lastname";
-    private final String KEY_COUNTRY = "country";
+    public final String spFileName = "main_sp";
+    public static final String KEY_TELE = "telephones";
+    public static final String KEY_FIRSTNAME = "firstname";
+    public static final String KEY_LASTNAME = "lastname";
+    private static final String KEY_COUNTRY = "country";
     private final String KEY_DEPARTMENT = "department";
 
     public static final String KEY_BIRTHDAY = "birthday";
@@ -114,9 +129,13 @@ public class MainActivity extends AppCompatActivity {
         this.sp = getSharedPreferences(this.spFileName, MODE_PRIVATE);
         this.departmentSpinn = (Spinner) findViewById(R.id.spinner);
         this.gotoDateActivityBT = (Button)findViewById(R.id.gotoDateActivity);
+        this.gotoEditFirstNMActivityBT = (Button)findViewById(R.id.gotoEditActivity);
+        this.gotoShowLastNMActivityBT = (Button)findViewById(R.id.gotoShowActivity);
+        this.gotoDialActivity = (Button)findViewById(R.id.bt_call_tele);
         getTeleNumbersFromSP();
         showInfoFromSF();
         showBirthday();
+        showFirstName();
         //showSavedInfo();
         if (!this.telephonesSet.isEmpty())
             showSavedTelephones();
@@ -165,9 +184,40 @@ public class MainActivity extends AppCompatActivity {
         this.gotoDateActivityBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DateActivity.class);
-
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                //Intent intent = new Intent(MainActivity.this, DateActivity.class);
+                birthday = birthdayEdit.getText().toString();
+                if (isValidFormat(birthday) && isValidDate(birthday)) {
+                   resolveBirthday();
+                   intent.putExtra(KEY_BIRTHDAY_YEAR, birthdayYear);
+                   intent.putExtra(KEY_BIRTHDAY_MONTH, birthdayMonth);
+                   intent.putExtra(KEY_BIRTHDAY_DAY, birthdayDay);
+                   startActivity(intent);
+               }
+            }
+        });
+        this.gotoShowLastNMActivityBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.putExtra(KEY_LASTNAME, lastNameEdit.getText().toString());
                 startActivity(intent);
+            }
+        });
+        this.gotoEditFirstNMActivityBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_EDIT);
+                intent.putExtra(KEY_FIRSTNAME, firstNameEdit.getText().toString());
+                startActivity(intent);
+            }
+        });
+        this.gotoDialActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<String> teles = new ArrayList<>();
+                teles.addAll(telephonesSet);
+                callPhone(teles.get(0));
             }
         });
         Log.i("Lifecycle MainActivity", "onResume method");
@@ -237,12 +287,53 @@ public class MainActivity extends AppCompatActivity {
             this.departmentSpinn.setSelection(this.sp.getInt(KEY_DEPARTMENT,1));
     }
 
+    private void showFirstName() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(KEY_FIRSTNAME) )
+            this.firstNameEdit.setText(intent.getStringExtra(KEY_FIRSTNAME));
+    }
+
     private void showBirthday() {
         Intent intent = getIntent();
         if (intent.hasExtra(DateActivity.KEY_RESULT_CODE) && intent.getBooleanExtra(DateActivity.KEY_RESULT_CODE, false)
         && intent.hasExtra(this.KEY_BIRTHDAY) )
             this.birthdayEdit.setText(intent.getStringExtra(this.KEY_BIRTHDAY));
     }
+
+    private void resolveBirthday() {
+        if (isValidDate(this.birthday)) {
+            this.birthdayDay = this.birthday.split("/")[0];
+            this.birthdayMonth = this.birthday.split("/")[1];
+            this.birthdayYear = this.birthday.split("/")[2];
+            return;
+        }
+    }
+
+    private boolean isValidDate(String s){
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            formatter.setLenient(false);
+            try{
+                Date date = formatter.parse(s);
+                System.out.println(date);
+                return true;
+            }catch(Exception e){
+                Snackbar.make((ConstraintLayout)findViewById(R.id.main_constraint_layout),R.string.not_valid_date,Snackbar.LENGTH_LONG).show();
+                return false;
+            }
+    }
+
+    private boolean isValidFormat(String s) {
+        Pattern p = Pattern.compile("^[0-9]{2}/[0-9]{2}/[0-9]{4}$");
+        Matcher m = p.matcher(s);
+        if (m.matches()) {
+            return true;
+        } else {
+            Snackbar.make((ConstraintLayout)findViewById(R.id.main_constraint_layout),R.string.bad_format_birthday,Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+
 
 //    private void showSavedInfo() {
 //        if (this.firstName != null)
@@ -322,6 +413,13 @@ public class MainActivity extends AppCompatActivity {
         gridTelephones.addView(itemTele);
         gridTelephones.addView(delete);
         this.teleEdit.setText("");
+    }
+
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
     }
 
     private void showSavedTelephones() {
