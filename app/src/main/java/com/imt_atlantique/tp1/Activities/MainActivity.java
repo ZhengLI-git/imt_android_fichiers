@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -18,7 +17,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Spinner;
@@ -29,15 +27,14 @@ import com.imt_atlantique.tp1.InputNumberCheck;
 import com.imt_atlantique.tp1.R;
 import com.imt_atlantique.tp1.User;
 
-import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private Button validate;
     private Button addTele;
     private Button gotoNext;
+    private Button gotoDateActivityBT;
     private EditText firstNameEdit;
     private EditText lastNameEdit;
     private EditText birthdayEdit;
@@ -54,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private final String KEY_TELE = "telephones";
     private final String KEY_FIRSTNAME = "firstname";
     private final String KEY_LASTNAME = "lastname";
-    private final String KEY_BIRTHDAY = "birthday";
     private final String KEY_COUNTRY = "country";
     private final String KEY_DEPARTMENT = "department";
+
+    public static final String KEY_BIRTHDAY = "birthday";
+    public static final String KEY_BIRTHDAY_YEAR = "year";
+    public static final String KEY_BIRTHDAY_MONTH = "month";
+    public static final String KEY_BIRTHDAY_DAY = "day";
+
 
     public static final String KEY_USER = "user";
 
@@ -65,12 +67,15 @@ public class MainActivity extends AppCompatActivity {
     private String firstName;
     private String lastName;
     private String birthday;
+    private String birthdayYear;
+    private String birthdayMonth;
+    private String birthdayDay;
     private String country;
     private String department;
 
 
 
-    final Calendar myCalendar = Calendar.getInstance();
+    //final Calendar myCalendar = Calendar.getInstance();
 
 
     @Override
@@ -108,32 +113,34 @@ public class MainActivity extends AppCompatActivity {
         this.gridTelephones = (GridLayout) findViewById(R.id.grid_list_telephones);
         this.sp = getSharedPreferences(this.spFileName, MODE_PRIVATE);
         this.departmentSpinn = (Spinner) findViewById(R.id.spinner);
+        this.gotoDateActivityBT = (Button)findViewById(R.id.gotoDateActivity);
         getTeleNumbersFromSP();
         showInfoFromSF();
+        showBirthday();
         //showSavedInfo();
         if (!this.telephonesSet.isEmpty())
             showSavedTelephones();
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-        this.birthdayEdit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(MainActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+//        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+//
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear,
+//                                  int dayOfMonth) {
+//                myCalendar.set(Calendar.YEAR, year);
+//                myCalendar.set(Calendar.MONTH, monthOfYear);
+//                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//                updateLabel();
+//            }
+//
+//        };
+//        this.birthdayEdit.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                new DatePickerDialog(MainActivity.this, date, myCalendar
+//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//            }
+//        });
         this.validate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -152,6 +159,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+        this.gotoDateActivityBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DateActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -222,6 +237,13 @@ public class MainActivity extends AppCompatActivity {
             this.departmentSpinn.setSelection(this.sp.getInt(KEY_DEPARTMENT,1));
     }
 
+    private void showBirthday() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(DateActivity.KEY_RESULT_CODE) && intent.getBooleanExtra(DateActivity.KEY_RESULT_CODE, false)
+        && intent.hasExtra(this.KEY_BIRTHDAY) )
+            this.birthdayEdit.setText(intent.getStringExtra(this.KEY_BIRTHDAY));
+    }
+
 //    private void showSavedInfo() {
 //        if (this.firstName != null)
 //            this.firstNameEdit.setText(this.firstName);
@@ -254,11 +276,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        birthdayEdit.setText(sdf.format(myCalendar.getTime()));
-    }
+//    private void updateLabel() {
+//        String myFormat = "MM/dd/yyyy"; //In which you need put here
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//        birthdayEdit.setText(sdf.format(myCalendar.getTime()));
+//    }
 
     public boolean resetAction(MenuItem item) {
         if (item.getTitle().equals("reset")) {
