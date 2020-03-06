@@ -2,44 +2,44 @@
     <string name="app_name">zheng and ye\'s app</string>
     <string name="activity_main">activity main</string>
     <string name="activity_second">second activity</string>
-    <string name="titleOfSecondActicity">ready</string>
-    <string name="BT_mainToSecond">validate</string>
-    <string name="BT_Clik">next</string>
+    <string name="titleOfSecondActicity">prète</string>
+    <string name="BT_mainToSecond">valider</string>
+    <string name="BT_Clik">continuer</string>
     <string name="BT_show_lastname">show</string>
-    <string name="BT_edit_firstname">edit</string>
+    <string name="BT_edit_firstname">éditer</string>
 
-    <string name="use_picker">use picker</string>
-    <string name="cancel">cancel</string>
-
-
-    <string name="label_firstname">firstname</string>
-    <string name="label_lastname">lastname</string>
-    <string name="label_birthday">birthday</string>
-    <string name="label_country">country</string>
-    <string name="label_telephone">telephone</string>
-    <string name="label_department">department</string>
+    <string name="use_picker">utiliser picker</string>
+    <string name="cancel">supprimer</string>
 
 
-    <string name="hint_firstname">firstname</string>
-    <string name="hint_lastname">lastname</string>
-    <string name="hint_birthday">birthday</string>
+    <string name="label_firstname">prénom</string>
+    <string name="label_lastname">nom</string>
+    <string name="label_birthday">date de naissance</string>
+    <string name="label_country">pays</string>
+    <string name="label_telephone">téléphone</string>
+    <string name="label_department">départment</string>
+
+
+    <string name="hint_firstname">prénom</string>
+    <string name="hint_lastname">nom</string>
+    <string name="hint_birthday">date de naissance</string>
     <string name="hint_birthday_format">dd/mm/yyyy</string>
-    <string name="hint_country">country</string>
-    <string name="hint_telephone">telephone</string>
+    <string name="hint_country">pays</string>
+    <string name="hint_telephone">téléphone</string>
 
 
-    <string name="bad_format_birthday">Sorry, please input your birthday in format of dd/mm/yyyy</string>
-    <string name="not_valid_date">Sorry, the date you input is not a valid date</string>
+    <string name="bad_format_birthday">Désolé, veuillez saisir votre date de naissance au format jj/mm/aaaa</string>
+    <string name="not_valid_date">Désolé, la date que vous avez saisie n\'est pas une date valable</string>
 
 
     <string name="reset_action">reset</string>
-    <string name="search_action">search</string>
-    <string name="share_action">share</string>
-    <string name="chooser_title">share your department by</string>
+    <string name="search_action">rechercher</string>
+    <string name="share_action">partager</string>
+    <string name="chooser_title">partager votre départment par</string>
 
-    <string name="err_badformat_number">Sorry, your number is in bad format, please retry.</string>
+    <string name="err_badformat_number">Désolé, votre numéro est mal formaté, veuillez réessayer.</string>
 
-    <string name="BT_add_tele">add</string>
-    <string name="BT_call_tele">call</string>
+    <string name="BT_add_tele">ajouter</string>
+    <string name="BT_call_tele">appeler</string>
 
 </resources>

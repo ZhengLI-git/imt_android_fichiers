@@ -10,6 +10,15 @@ public class User implements Parcelable {
     private String lastName;
     private String department;
 
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public User(String firstName, String lastName, String department) {
         this.firstName = firstName;
@@ -52,15 +61,7 @@ public class User implements Parcelable {
     public int describeContents() {
         return 0;
     }
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
 
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.firstName);

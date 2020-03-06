@@ -295,8 +295,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void showBirthday() {
         Intent intent = getIntent();
-        if (intent.hasExtra(DateActivity.KEY_RESULT_CODE) && intent.getBooleanExtra(DateActivity.KEY_RESULT_CODE, false)
-        && intent.hasExtra(this.KEY_BIRTHDAY) )
+//        if (intent.hasExtra(DateActivity.KEY_RESULT_CODE) && intent.getBooleanExtra(DateActivity.KEY_RESULT_CODE, false)
+//        && intent.hasExtra(this.KEY_BIRTHDAY) )
+        if (intent.hasExtra(this.KEY_BIRTHDAY))
             this.birthdayEdit.setText(intent.getStringExtra(this.KEY_BIRTHDAY));
     }
 
