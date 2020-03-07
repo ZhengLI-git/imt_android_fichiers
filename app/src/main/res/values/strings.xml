@@ -20,12 +20,12 @@
     <string name="label_department">départment</string>
 
 
-    <string name="hint_firstname">prénom</string>
-    <string name="hint_lastname">nom</string>
-    <string name="hint_birthday">date de naissance</string>
+    <string name="hint_firstname"></string>
+    <string name="hint_lastname"></string>
+    <string name="hint_birthday"></string>
     <string name="hint_birthday_format">dd/mm/yyyy</string>
-    <string name="hint_country">pays</string>
-    <string name="hint_telephone">téléphone</string>
+    <string name="hint_country"></string>
+    <string name="hint_telephone"></string>
 
 
     <string name="bad_format_birthday">Désolé, veuillez saisir votre date de naissance au format jj/mm/aaaa</string>

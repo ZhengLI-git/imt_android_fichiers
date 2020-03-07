@@ -38,7 +38,7 @@ public class DisplayActivity extends AppCompatActivity {
 
     private void getValue() {
         Intent intent = getIntent();
-        User user = (User)intent.getParcelableExtra(MainActivity.KEY_USER);
+        User user = (User)intent.getParcelableExtra(InputInfoFragment.KEY_USER);
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.department = user.getDepartment();

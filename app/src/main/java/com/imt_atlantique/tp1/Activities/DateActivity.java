@@ -67,9 +67,9 @@ public class DateActivity extends AppCompatActivity {
 
     private void getDefaultValue() {
         Intent intent = getIntent();
-        this.year = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_YEAR);
-        this.month = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_MONTH);
-        this.day = intent.getStringExtra(MainActivity.KEY_BIRTHDAY_DAY);
+        this.year = intent.getStringExtra(InputInfoFragment.KEY_BIRTHDAY_YEAR);
+        this.month = intent.getStringExtra(InputInfoFragment.KEY_BIRTHDAY_MONTH);
+        this.day = intent.getStringExtra(InputInfoFragment.KEY_BIRTHDAY_DAY);
     }
 
     private void updateLabel() {
@@ -81,7 +81,7 @@ public class DateActivity extends AppCompatActivity {
     private void backToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(this.KEY_RESULT_CODE, true);
-        intent.putExtra(MainActivity.KEY_BIRTHDAY, this.birthday);
+        intent.putExtra(InputInfoFragment.KEY_BIRTHDAY, this.birthday);
         startActivity(intent);
     }
 

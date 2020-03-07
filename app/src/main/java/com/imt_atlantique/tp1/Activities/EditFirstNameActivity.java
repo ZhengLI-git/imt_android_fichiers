@@ -39,13 +39,13 @@ public class EditFirstNameActivity extends AppCompatActivity {
 
     private void setDefaultFirstNM() {
         Intent intent = getIntent();
-        if (intent.hasExtra(MainActivity.KEY_FIRSTNAME))
-            this.firstnameView.setText(intent.getStringExtra(MainActivity.KEY_FIRSTNAME));
+        if (intent.hasExtra(InputInfoFragment.KEY_FIRSTNAME))
+            this.firstnameView.setText(intent.getStringExtra(InputInfoFragment.KEY_FIRSTNAME));
     }
 
     private void sendNmToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MainActivity.KEY_FIRSTNAME,this.firstnameView.getText().toString());
+        intent.putExtra(MainActivity.INPUT_METHOD_SERVICE,this.firstnameView.getText().toString());
         startActivity(intent);
     }
 }

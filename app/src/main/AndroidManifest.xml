@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activities.ShowLastNameActivity">
+        <activity android:name=".Activities.ShowLastNameFragment">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
